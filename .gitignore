@@ -33,3 +33,5 @@ tmp/
 *.exe
 *.out
 *.app
+
+/results/
