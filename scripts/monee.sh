@@ -13,6 +13,7 @@ DEFINE_string 'template' 'TwoColours' 'Template file name'
 DEFINE_float 'task1premium' '1.0' 'Premium (multiplication factor) for the 1st task'
 DEFINE_boolean 'market' true 'Enable currency exchange mechanism'
 DEFINE_boolean 'sigmarket' true 'Enable signmoidal currency exchange mechanism. Only possible if market is used'
+DEFINE_integer 'sigmarketslope' '10000' 'Set the slope of the sigmarket. Hig values (10000) = Step function; 0 = 0.5 exchange rate'
 DEFINE_float 'specialisation' 0.0 'Penalise generalists (by limiting their speed). Higher values: stricter penalty. 0.0: no penalty, 1.0: standard penalty.' 
 DEFINE_boolean 'randomSelection' false 'Random parent selection'
 DEFINE_float 'commDistance' '27' 'Maximum communication distance'
@@ -33,8 +34,9 @@ BASEDIR=${FLAGS_basedir}
 TEMPLATEDIR=${FLAGS_templatedir}
 CONFNAME=${FLAGS_template}
 TASK1PREMIUM=${FLAGS_task1premium}
+SIGMARKETSLOPE=${FLAGS_sigmarketslope}
 
-echo "running basename $0 --seed ${FLAGS_seed} --basedir ${BASEDIR} --templatedir ${TEMPLATEDIR} --iterations ${FLAGS_iterations} --logdir ${FLAGS_logdir} --template ${CONFNAME} --task1premium ${FLAGS_task1premium} --specialisation ${FLAGS_specialisation}" >> ${HOME}/monee/monee-master/moneesh-out.txt
+echo "running basename $0 --seed ${FLAGS_seed} --basedir ${BASEDIR} --templatedir ${TEMPLATEDIR} --iterations ${FLAGS_iterations} --logdir ${FLAGS_logdir} --template ${CONFNAME} --task1premium ${FLAGS_task1premium} --sigmarketslope ${FLAGS_sigmarketslope} --specialisation ${FLAGS_specialisation}" >> ${HOME}/monee/monee-master/moneesh-out.txt
 
 RUNID=`date "+%Y%m%d.%Hh%Mm%Ss"`.${RANDOM}
 
@@ -60,6 +62,7 @@ ITERATIONREP=s/--ITERATIONS/${FLAGS_iterations}/g
 OUTPUTLOGREP=s/--OUTPUTLOG/${OUTPUTLOGFILE}/g
 COLLISIONLOGREP=s/--COLLISIONLOG/${COLLISIONLOGFILE}/g
 TASKPREMIUMREP=s/--TASK1PREMIUM/${TASK1PREMIUM}/g
+SIGMARKETSLOPEREP=s/--SIGMARKETSLOPE/${SIGMARKETSLOPE}/g
 COMMDISTREP=s/--COMMDISTANCE/${FLAGS_commDistance}/g
 USESPECREP=s/--USE_SPECIALISATION/${FLAGS_specialisation}/g
 LIFETIMEREP=s/--MAXLIFETIME/${FLAGS_maxLifeTime}/g

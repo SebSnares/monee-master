@@ -124,6 +124,8 @@ std::cout << "Tournament size: " << _tournamentSize << std::endl;
 	gProperties.checkAndGetPropertyValue("gUseMarket", &_useMarket, true); //turn market on and off here
 	_useSigMarket = true;
 	gProperties.checkAndGetPropertyValue("gUseSigMarket", &_useSigMarket, true);
+	_sigmarketSlope = 10000;
+	gProperties.checkAndGetPropertyValue("gSigMarketSlope", &_sigmarketSlope, 10000);
     _useSpecBonus = false;
 	gProperties.checkAndGetPropertyValue("gUseSpecBonus", &_useSpecBonus, false);
 	_task1Premium = 1.0;
@@ -253,7 +255,7 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
 	// Calculate the puck prices (depending on puck fraction)
 	std::vector<double> puckPrices;
 	puckPrices.resize(gPuckColors);
-	int steep = 10000; //added for control over "k" in logistic function *test run with high value similar to step function in jones&mataric work 2003
+	int steep = _sigmarketSlope; //added for control over "k" in logistic function *test run with high value similar to step function in jones&mataric work 2003
 	double desiredRatio = 1.0/gPuckColors; // for even distribution of pucktypes collected - to put more weight on some pucktypes use 'i' in for-loop
 
 	for (int i = 0; i < gPuckColors; i++) {
