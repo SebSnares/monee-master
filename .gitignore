@@ -1,10 +1,3 @@
-*.o
-*.swp
-*.lib
-*.so
-*.out
-logs/
-tmp/
 # Compiled Object files
 *.slo
 *.lo
