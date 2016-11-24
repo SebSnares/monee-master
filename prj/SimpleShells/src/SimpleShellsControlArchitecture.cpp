@@ -122,7 +122,9 @@ std::cout << "Tournament size: " << _tournamentSize << std::endl;
 	gProperties.checkAndGetPropertyValue("gRandomSelection", &_randomSelection, false);
 	_useMarket = true;
 	gProperties.checkAndGetPropertyValue("gUseMarket", &_useMarket, true); //turn market on and off here
-	_useSpecBonus = false;
+	_useSigMarket = true;
+	gProperties.checkAndGetPropertyValue("gUseSigMarket", &_useSigMarket, true);
+    _useSpecBonus = false;
 	gProperties.checkAndGetPropertyValue("gUseSpecBonus", &_useSpecBonus, false);
 	_task1Premium = 1.0;
 	gProperties.checkAndGetPropertyValue("gTask1Premium", &_task1Premium, 1.0);
@@ -258,7 +260,11 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
 		if (i != _wm->_energyPuckId || !_wm->_excludeEnergyPucks) {
 
 			if (_useMarket) { 
-				puckPrices[i] = (puckTotals[i] == 0) ? 0.0 : 1.0 / (1.0 + std::exp( -double(steep) * ((double(cumTotal) / double(puckTotals[i]))-(1.0 / desiredRatio)))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
+                if (_useSigMarket) {
+                    puckPrices[i] = (puckTotals[i] == 0) ? 0.0 : 1.0 / (1.0 + std::exp( -1 * double(steep) * ((double(cumTotal) / double(puckTotals[i]))-(1.0 / desiredRatio)))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
+                } else {
+                    puckPrices[i] = (puckTotals[i] == 0) ? 0.0 : double(cumTotal) / double(puckTotals[i]);                    
+                }
 			} else {
 				puckPrices[i] = 1.0;
 			}

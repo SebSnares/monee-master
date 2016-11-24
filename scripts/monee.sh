@@ -12,6 +12,7 @@ DEFINE_string 'logdir' 'logs' 'Directory to store the output'
 DEFINE_string 'template' 'TwoColours' 'Template file name'
 DEFINE_float 'task1premium' '1.0' 'Premium (multiplication factor) for the 1st task'
 DEFINE_boolean 'market' true 'Enable currency exchange mechanism'
+DEFINE_boolean 'sigmarket' true 'Enable signmoidal currency exchange mechanism. Only possible if market is used'
 DEFINE_float 'specialisation' 0.0 'Penalise generalists (by limiting their speed). Higher values: stricter penalty. 0.0: no penalty, 1.0: standard penalty.' 
 DEFINE_boolean 'randomSelection' false 'Random parent selection'
 DEFINE_float 'commDistance' '27' 'Maximum communication distance'
@@ -72,7 +73,11 @@ if [ ${FLAGS_market} -eq ${FLAGS_TRUE} ]; then
 else
   USEMARKETREP=s/--USE_MARKET/false/g
 fi
-
+if [ ${FLAGS_sigmarket} -eq ${FLAGS_TRUE} ]; then
+  USESIGMARKETREP=s/--USE_SIGMARKET/true/g
+else
+  USESIGMARKETREP=s/--USE_SIGMARKET/false/g
+fi
 
 if [ ${FLAGS_randomSelection} -eq ${FLAGS_TRUE} ]; then
   USERANDSELREP=s/--USE_RANDOMSELECTION/true/g
@@ -101,6 +106,7 @@ fi
 # Fill out and place the configuration file
 sed -e $USERANDSELREP \
     -e $USEMARKETREP  \
+    -e $USESIGMARKETREP  \
     -e $USESPECREP  \
     -e $TASKPREMIUMREP  \
     -e $COLLISIONLOGREP \
