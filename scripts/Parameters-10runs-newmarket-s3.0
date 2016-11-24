@@ -1,10 +1,10 @@
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.1  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.2  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.3  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.4  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.5  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.6  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.7  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.8  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.9  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0.10  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
+--iterations 1000000  --task1premium 1 --logdir --sigmarket /home/sbangel/monee/monee-master/results/markettest/k_10000-Spec_3.0  --specialisation 3.0
