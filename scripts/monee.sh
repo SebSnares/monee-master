@@ -34,7 +34,7 @@ BASEDIR=${FLAGS_basedir}
 TEMPLATEDIR=${FLAGS_templatedir}
 CONFNAME=${FLAGS_template}
 TASK1PREMIUM=${FLAGS_task1premium}
-SIGMARKETSLOPE=${FLAGS_sigmarketslope}
+#SIGMARKETSLOPE=${FLAGS_sigmarketslope} - maybe causes error in .properties config file?
 
 echo "running basename $0 --seed ${FLAGS_seed} --basedir ${BASEDIR} --templatedir ${TEMPLATEDIR} --iterations ${FLAGS_iterations} --logdir ${FLAGS_logdir} --template ${CONFNAME} --task1premium ${FLAGS_task1premium} --sigmarketslope ${FLAGS_sigmarketslope} --specialisation ${FLAGS_specialisation}" >> ${HOME}/monee/monee-master/moneesh-out.txt
 
