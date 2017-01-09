@@ -4,7 +4,7 @@
 # Command echoing on.
 
 #walltime for quicktest 00:04:59
-#PBS -lnodes=1 -lwalltime=00:09:59
+#PBS -lnodes=1 -lwalltime=00:14:59
 
 ### Set the simulation-specific parameters
 #--------------------------------------------------------------------------------------------------#
