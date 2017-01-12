@@ -25,7 +25,7 @@ for i in $@
 do
   pushd $i
   (
-   bash ${BASEDIR}/counts.sh --iterations ${FLAGS_iterations}
+   bash ${BASEDIR}/countsit2.sh --iterations ${FLAGS_iterations}
    #bash ${BASEDIR}/pucks.sh
    #bash ${BASEDIR}/count-inseminations.sh --iterations ${FLAGS_iterations}
    #bash ${BASEDIR}/count-offspring.sh
