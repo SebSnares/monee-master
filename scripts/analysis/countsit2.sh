@@ -13,7 +13,7 @@ eval set -- "${FLAGS_ARGV}"
 BINSIZE=1000
 ITERATIONS=${FLAGS_iterations}
 
-RESULTS=pucks-collected
+RESULTS=pucks-collected-2
 DIR=`readlink -fn $0`
 BASEDIR=`dirname $DIR`
 
