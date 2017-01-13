@@ -277,7 +277,7 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
 				puckPrices[i] = 1.0;
 				std::cout << "use no market" << '\n';
 			}
-			std::cout << "Puck price: type:" << i <<"Price :<< puckPrices[i] << '\n';
+			std::cout << "Puck price: type:" << i <<"Price :"<< puckPrices[i] << '\n';
 		}
 	}
 	std::cout << std::endl;
