@@ -1,10 +1,4 @@
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test/ --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
---iterations 1000000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test --sigmarket --sigmarketslope 1000  --specialisation 3.0
+--iterations 100000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test/k10/ --sigmarket --sigmarketslope 10  --specialisation 3.0
+--iterations 100000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test/k20/ --sigmarket --sigmarketslope 20  --specialisation 3.0
+--iterations 100000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test/k50/ --sigmarket --sigmarketslope 50  --specialisation 3.0
+--iterations 100000  --task1premium 1 --logdir /home/sbangel/monee/monee-master/results/test/k100/ --sigmarket --sigmarketslope 100  --specialisation 3.0
