@@ -14,7 +14,7 @@ DEFINE_integer 'puckTypes' 2 'Number of types of puck' 'p'
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
 
-SCRIPT_DIR=/Volumes/Slartibartfast/monee/analyse
+SCRIPT_DIR=$HOME/monee/monee-master/scripts/analysis
 
 rm -f *.FET
 
