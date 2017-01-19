@@ -11,9 +11,9 @@
 # Time(generation) Id Offspring Fitness(es)
 #
 #BASEDIR=~/Documents/Projecten/QuantifyingSP/
-BASEDIR=~/projects/workspace/SelectionPressure/output/
+BASEDIR=$HOME/monee/monee-master/results/Pressure/
 
-. ${HOME}/opt/lib/shflags
+. ${HOME}/lib/shflags
 
 #define the command line options
 DEFINE_boolean 'plotOnly' false "Don't regenerate data, just generate a plot"
