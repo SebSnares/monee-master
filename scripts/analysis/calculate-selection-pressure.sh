@@ -18,7 +18,7 @@ SCRIPT_DIR=$HOME/monee/monee-master/scripts/analysis
 
 rm -f *.FET
 
-TEMP=`mktemp -t MONEEFET`
+TEMP=`mktemp -t MONEEFETXXX`
 
 for run in *.pressure-stats
 do

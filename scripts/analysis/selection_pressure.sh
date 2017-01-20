@@ -11,7 +11,7 @@
 # Time(generation) Id Offspring Fitness(es)
 #
 #BASEDIR=~/Documents/Projecten/QuantifyingSP/
-BASEDIR=$HOME/monee/monee-master/Pressure
+BASEDIR=$HOME/monee/monee-master/scripts/analysis/pressure
 
 . ${HOME}/lib/shflags
 
