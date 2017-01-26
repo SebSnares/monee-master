@@ -116,7 +116,7 @@ do
 				# somehow, the R code adds 'NULL' line in some cases, use sed to filter
 				# that out. sort command makes sure that output is sorted by
 				# timestep/generation
-				#module load R #needed to run on LISA?
+				module load R #needed to run on LISA?
 				R --no-save --slave < $rscript | sed '/NULL/d' | sort -n > ${FLAGS_output}/$experiment_name.$objective.FET.txt
 
                 rm $tempfile
@@ -146,7 +146,7 @@ do
 				echo 'cat(paste(names(coefs), coefs), sep = "\n")' >> $rscript
 
 				# Added sed to filter out spurious warnings by Kendall package
-				#module load R
+				module load R
 				R --no-save --slave < $rscript | sed '/^WARNING/d' > ${FLAGS_output}/$experiment_name.$objective.rankbased.txt
 
 				rm $tempfile

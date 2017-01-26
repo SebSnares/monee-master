@@ -16,7 +16,7 @@ DEFINE_string 'iterations' '1000000' 'Number of iterations' 'i'
 # Parse the flags
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
-set -x
+#set -x
 DIR=`readlink -fn $0`
 BASEDIR=`dirname $DIR`
 #BASEDIR=$HOME/monee/results
