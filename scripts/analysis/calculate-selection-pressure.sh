@@ -43,18 +43,19 @@ do
 
 	# for two puck types:
 	#cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count"} {print 2000*int($1/2000), $2, $6, $5, $3+$4}' $run | sed '/^1000000/d' | sort -n > ${experiment}.tmp
+	# for 1000000 iterations sed '/^1000000/d', change accordingly
 	#METRICS='dist pucks'
 	if [ "$FLAGS_puckTypes" -eq "2" ]
 	then
 		# for two puck types with age column :
 		echo $experiment
-		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $7, $5/$6, $3+$4, $6}' $run | sed '/^1000000/d' | sort -n > ${experiment}.tmp
+		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $7, $5/$6, $3+$4, $6}' $run | sed '/^2000000/d' | sort -n > ${experiment}.tmp
 	fi
 
 	if [ "$FLAGS_puckTypes" -eq "1" ]
 	then
 		# for one puck type, with age column (now use avg. speed rather than distance covered):
-		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $6, $4/$5, $3, $5}' $run | sed '/^1000000/d' | sort -n > ${experiment}.tmp
+		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $6, $4/$5, $3, $5}' $run | sed '/^2000000/d' | sort -n > ${experiment}.tmp
 	fi
 	METRICS='speed pucks age'
 	bash  ${SCRIPT_DIR}/selection_pressure.sh ${experiment}.tmp --method fisher --optimisation max
