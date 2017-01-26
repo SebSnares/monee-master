@@ -4,7 +4,6 @@
 #
 # selection pressure calculations are done by 'selection_pressure.sh' from ECJ paper
 #
-#set +x #for debugging
 FULLCOMMAND="$0 $@"
 . ${HOME}/lib/shflags
 
@@ -14,13 +13,12 @@ DEFINE_integer 'puckTypes' 2 'Number of types of puck' 'p'
 # Parse the flags
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
-#set -x
-SCRIPT_DIR=$HOME/monee/monee-master/scripts/analysis
-BASEDIR=$HOME/monee/monee-master/scripts/analysis/pressure
+
+SCRIPT_DIR=/Volumes/Slartibartfast/monee/analyse
 
 rm -f *.FET
 
-TEMP=`mktemp -t MONEEFETXXX`
+TEMP=`mktemp -t MONEEFET`
 
 for run in *.pressure-stats
 do
@@ -47,7 +45,6 @@ do
 	if [ "$FLAGS_puckTypes" -eq "2" ]
 	then
 		# for two puck types with age column :
-		echo $experiment
 		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $7, $5/$6, $3+$4, $6}' $run | sed '/^1000000/d' | sort -n > ${experiment}.tmp
 	fi
 
@@ -57,13 +54,13 @@ do
 		cat $run | awk 'BEGIN{print "#time Id offspring distance puck_count age"} {print 2000*int($1/2000), $2, $6, $4/$5, $3, $5}' $run | sed '/^1000000/d' | sort -n > ${experiment}.tmp
 	fi
 	METRICS='speed pucks age'
+
 	bash  ${SCRIPT_DIR}/selection_pressure.sh ${experiment}.tmp --method fisher --optimisation max
 	rm ${experiment}.tmp
 
 	index=1
 	for metric in $METRICS
 	do
-		echo renaming $index to $metric
 		awk '{print $1, -(log($2)/log(10))}' ${experiment}.tmp.${index}.FET.txt > ${experiment}.${metric}.FET
 		rm ${experiment}.tmp.${index}.FET.txt
 
@@ -81,7 +78,7 @@ done
 
 for metric in $METRICS
 do
-	gawk -v skip=1 -v prepend=true -f $BASEDIR/moments-per-line.awk ${metric}.FET > ${metric}.FET.stats
+	gawk -v skip=1 -v prepend=true -f moments-per-line.awk ${metric}.FET > ${metric}.FET.stats
 done
 
 rm -f $TEMP

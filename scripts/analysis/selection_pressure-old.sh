@@ -11,10 +11,9 @@
 # Time(generation) Id Offspring Fitness(es)
 #
 #BASEDIR=~/Documents/Projecten/QuantifyingSP/
-#set +x
-BASEDIR=$HOME/monee/monee-master/scripts/analysis/pressure
+BASEDIR=~/projects/workspace/SelectionPressure/output/
 
-. ${HOME}/lib/shflags
+. ${HOME}/opt/lib/shflags
 
 #define the command line options
 DEFINE_boolean 'plotOnly' false "Don't regenerate data, just generate a plot"
@@ -26,7 +25,7 @@ DEFINE_string 'optimisation' 'max' "Is it a maximisation or minimisation problem
 # Parse the flags
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
-#set -x
+
 do_fisher=${FLAGS_FALSE}
 do_rankbased=${FLAGS_FALSE}
 if [ ${FLAGS_method} == 'fisher' ]
@@ -99,12 +98,11 @@ do
 				# Awk script expected pressure-stats columns:
 				# Time (e.g. Generation), Id, offspring, fitness(es)
 				#
-				#echo ${TMPDIR}
-				tempfile=`mktemp -t FETXXXX`
+				tempfile=`mktemp ${TMPDIR}/FETXXXX`
                 ${GREP} "${RECORD_FILTER}" $experiment | gawk -v max=$do_max -v objective=$objective -f $BASEDIR/fishers_exact_test.awk  > $tempfile
 
 				# Generate script to call R's Fisher's exact test for calculation
-				rscript=`mktemp -t rscriptXXXX`
+				rscript=`mktemp ${TMPDIR}/rscriptXXXX`
 
 				echo 'theTest <- function(x) {' > $rscript
 				echo '	result = fisher.test(matrix(c(x["A"],x["C"],x["B"],x["D"]),nrow=2), alternative = "greater")' >> $rscript
@@ -116,7 +114,6 @@ do
 				# somehow, the R code adds 'NULL' line in some cases, use sed to filter
 				# that out. sort command makes sure that output is sorted by
 				# timestep/generation
-				#module load R #needed to run on LISA?
 				R --no-save --slave < $rscript | sed '/NULL/d' | sort -n > ${FLAGS_output}/$experiment_name.$objective.FET.txt
 
                 rm $tempfile
@@ -130,13 +127,13 @@ do
 				#
 				# use awk to strip comments and select objective
 				#
-				tempfile=`mktemp -t rankbasedXXXX`
+				tempfile=`mktemp ${TMPDIR}/rankbasedXXXX`
 				${CAT} $experiment | gawk -v objective=$objective "/${RECORD_FILTER}/{print \$1, \$2, \$3, \$(3+objective)}" > $tempfile
 
 				#
 				# Generate script to call R's kendall test for calculation
 				#
-				rscript=`mktemp -t rscriptXXXX`
+				rscript=`mktemp ${TMPDIR}/rscriptXXXX`
                 #echo 'install.packages("Kendall")' >>$rscript
 				echo 'names <- c("generation", "Id", "offspring", "fitness")' > $rscript
 				echo "myData <- read.table(\"$tempfile\", sep=\" \", col.names=names)" >> $rscript
@@ -146,7 +143,6 @@ do
 				echo 'cat(paste(names(coefs), coefs), sep = "\n")' >> $rscript
 
 				# Added sed to filter out spurious warnings by Kendall package
-				#module load R
 				R --no-save --slave < $rscript | sed '/^WARNING/d' > ${FLAGS_output}/$experiment_name.$objective.rankbased.txt
 
 				rm $tempfile

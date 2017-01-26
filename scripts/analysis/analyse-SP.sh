@@ -16,7 +16,7 @@ DEFINE_string 'iterations' '1000000' 'Number of iterations' 'i'
 # Parse the flags
 FLAGS "$@" || exit 1
 eval set -- "${FLAGS_ARGV}"
-
+set -x
 DIR=`readlink -fn $0`
 BASEDIR=`dirname $DIR`
 #BASEDIR=$HOME/monee/results
@@ -31,18 +31,3 @@ do
 done
 
 wait
-
-#bash ${BASEDIR}/make-plots.sh $@
-
-# lines below specific to runs w. multiple premium settings
-# bash ${BASEDIR}/calc_ratios.sh --iterations ${FLAGS_iterations}
-# gnuplot ${BASEDIR}/plot-pucks-ratio
-# gnuplot ${BASEDIR}/plot-pucks-counts
-# gnuplot ${BASEDIR}/plot-inseminations
-# 
-# 
-# for i in *png
-# do 
-#   DEST=`readlink -f $i | sed 's|'${BASEDIR}'/||' | sed -e 's/\//./g'`
-#   cp $i ${BASEDIR}/summary/${DEST}
-# done
