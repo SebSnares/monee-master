@@ -26,7 +26,14 @@ std::vector<Genome>::const_iterator SimpleShellsControlArchitecture::selectWeigh
 	}
 	// else
 
-	if (_randomSelection)
+	if (_useHalfSelection){ //If half selection is turned on (=true) then 50/50 chance of using random selection (=1) else dont affect random selection (=0)
+		int Halfselection = Rand::randint(0,1);
+	}
+	else{
+		int Halfselection = 0;
+	}
+
+	if (_randomSelection||Halfselection == 1) 
 	{
 		std::cout << std::endl;
 	        // Do some logging
@@ -126,6 +133,8 @@ std::cout << "Tournament size: " << _tournamentSize << std::endl;
 	gProperties.checkAndGetPropertyValue("gUseSigMarket", &_useSigMarket, true);
 	_sigmarketSlope = 10000;
 	gProperties.checkAndGetPropertyValue("gSigMarketSlope", &_sigmarketSlope, 10000);
+	_useHalfSelection = true;
+	gProperties.checkAndGetPropertyValue("gUseHalfSelection", &_useHalfSelection, true);
     _useSpecBonus = false;
 	gProperties.checkAndGetPropertyValue("gUseSpecBonus", &_useSpecBonus, false);
 	_task1Premium = 1.0;

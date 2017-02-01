@@ -14,6 +14,7 @@ DEFINE_float 'task1premium' '1.0' 'Premium (multiplication factor) for the 1st t
 DEFINE_boolean 'market' true 'Enable currency exchange mechanism'
 DEFINE_boolean 'sigmarket' false 'Enable signmoidal currency exchange mechanism. Only possible if market is used'
 DEFINE_integer 'sigmarketslope' '10000' 'Set the slope of the sigmarket. Hig values (10000) = Step function; 0 = 0.5 exchange rate'
+DEFINE_boolean'halfselection' 'false' 'if true, half of the time random selection is used'
 DEFINE_float 'specialisation' 0.0 'Penalise generalists (by limiting their speed). Higher values: stricter penalty. 0.0: no penalty, 1.0: standard penalty.' 
 DEFINE_boolean 'randomSelection' false 'Random parent selection'
 DEFINE_float 'commDistance' '27' 'Maximum communication distance'
@@ -36,7 +37,7 @@ CONFNAME=${FLAGS_template}
 TASK1PREMIUM=${FLAGS_task1premium}
 #SIGMARKETSLOPE=${FLAGS_sigmarketslope} - maybe causes error in .properties config file?
 
-echo "running basename $0 --seed ${FLAGS_seed} --basedir ${BASEDIR} --templatedir ${TEMPLATEDIR} --iterations ${FLAGS_iterations} --logdir ${FLAGS_logdir} --template ${CONFNAME} --task1premium ${FLAGS_task1premium} --sigmarketslope ${FLAGS_sigmarketslope} --specialisation ${FLAGS_specialisation}" >> ${HOME}/monee/monee-master/moneesh-out.txt
+echo "running basename $0 --seed ${FLAGS_seed} --basedir ${BASEDIR} --templatedir ${TEMPLATEDIR} --iterations ${FLAGS_iterations} --logdir ${FLAGS_logdir} --template ${CONFNAME} --task1premium ${FLAGS_task1premium} --sigmarketslope ${FLAGS_sigmarketslope} --halfselection ${FLAGS_halfselection} --specialisation ${FLAGS_specialisation}" >> ${HOME}/monee/monee-master/moneesh-out.txt
 
 RUNID=`date "+%Y%m%d.%Hh%Mm%Ss"`.${RANDOM}
 
@@ -81,7 +82,11 @@ if [ ${FLAGS_sigmarket} -eq ${FLAGS_TRUE} ]; then
 else
   USESIGMARKETREP=s/--USE_SIGMARKET/false/g
 fi
-
+if [ ${FLAGS_halfselection} -eq ${FLAGS_TRUE} ]; then
+  USEHALFSELECTOIN=s/--USE_HALFSELECTION/true/g
+else
+  USEHALFSELECTION=s/--USE_HALFSELEVTION/false/g
+fi
 if [ ${FLAGS_randomSelection} -eq ${FLAGS_TRUE} ]; then
   USERANDSELREP=s/--USE_RANDOMSELECTION/true/g
 else
@@ -111,6 +116,7 @@ sed -e $USERANDSELREP \
     -e $USEMARKETREP  \
     -e $SIGMARKETSLOPEREP \
     -e $USESIGMARKETREP \
+    -e $USEHALFSELECTIONREP \
     -e $USESPECREP  \
     -e $TASKPREMIUMREP  \
     -e $COLLISIONLOGREP \

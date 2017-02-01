@@ -28,6 +28,7 @@ class SimpleShellsControlArchitecture : public BehaviorControlArchitecture {
         
         bool _useMarket; //UseMarket initialized here
         bool _useSigMarket;
+        bool _useHalfSelection;
         bool _useSpecBonus;
         bool _randomSelection;
 	double _task1Premium;
