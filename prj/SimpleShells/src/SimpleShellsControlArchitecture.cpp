@@ -25,15 +25,12 @@ std::vector<Genome>::const_iterator SimpleShellsControlArchitecture::selectWeigh
 		return genomes.begin();
 	}
 	// else
-
+	int halfselection = 0;
 	if (_useHalfSelection){ //If half selection is turned on (=true) then 50/50 chance of using random selection (=1) else dont affect random selection (=0)
-		int Halfselection = Rand::randint(0,1);
-	}
-	else{
-		int Halfselection = 0;
+		halfselection = Rand::randint(0,1);
 	}
 
-	if (_randomSelection||Halfselection == 1) 
+	if (_randomSelection||halfselection == 1) 
 	{
 		std::cout << std::endl;
 	        // Do some logging
