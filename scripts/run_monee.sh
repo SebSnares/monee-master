@@ -4,9 +4,10 @@
 # Command echoing on.
 
 #walltime for quicktest 00:04:59
+#walltime for halfeselection 2.000.0000 00:24:59
 #walltime for iterations 2.000.0000 00:14:59
 #walltime for iterations 1.000.0000 00:09:59
-#PBS -lnodes=1 -lwalltime=00:14:59
+#PBS -lnodes=1 -lwalltime=00:24:59
 
 ### Set the simulation-specific parameters
 #--------------------------------------------------------------------------------------------------#

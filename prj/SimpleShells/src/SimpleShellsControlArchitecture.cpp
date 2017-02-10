@@ -28,6 +28,7 @@ std::vector<Genome>::const_iterator SimpleShellsControlArchitecture::selectWeigh
 	int halfselect = 0;
 	if (_useHalfSelection){ //If half selection is turned on (=true) then 50/50 chance of using random selection (=1) else dont affect random selection (=0)
 		halfselect = Rand::randint(0,1);
+		std::cout << "halfselection: true" <<'\n';
 	}
 
 	if (_randomSelection||halfselect == 1) 
@@ -130,6 +131,10 @@ std::cout << "Tournament size: " << _tournamentSize << std::endl;
 	gProperties.checkAndGetPropertyValue("gUseSigMarket", &_useSigMarket, true);
 	_sigmarketSlope = 10000;
 	gProperties.checkAndGetPropertyValue("gSigMarketSlope", &_sigmarketSlope, 10000);
+	_sigmarketMax = 1;
+	gProperties.checkAndGetPropertyValue("gSigMarketMax", &_sigmarketMax, 1.0);
+	_sigmarketMin = 0;
+	gProperties.checkAndGetPropertyValue("gSigMarketMin", &_sigmarketMin, 0.0);
 	_useHalfSelection = true;
 	gProperties.checkAndGetPropertyValue("gUseHalfSelection", &_useHalfSelection, true);
     _useSpecBonus = false;
@@ -274,7 +279,8 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
                    std::cout << "use sigmarket with steep: " << steep << '\n';
                    currentRatio = (cumTotal == 0) ? 0.0 : double(puckTotals[i])/double(cumTotal);  //calculate current puck ratio per type/total. If cumTotal = 0 avoid divide by zero error
                    std::cout << "puck ratio: " << double(puckTotals[i]) << "/" << double(cumTotal) << " = " << currentRatio << '\n';
-                   puckPrices[i] = (cumTotal == 0) ? 0.0 : 1.0 / (1.0 + std::exp( steep * (currentRatio - desiredRatio))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
+                   std::cout << "market: " double(_sigmarketMin) << "+" << (double(_sigmarketMax) - double(_sigmarketMin)) << " / " << (1.0 + std::exp( steep * (currentRatio - desiredRatio))) << '\n';
+                   puckPrices[i] = (cumTotal == 0) ? 0.0 : double(_sigmarketMin) + (double(_sigmarketMax) - double(_sigmarketMin)) / (1.0 + std::exp( steep * (currentRatio - desiredRatio))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
                 } else {
                     puckPrices[i] = (puckTotals[i] == 0) ? 0.0 : double(cumTotal) / double(puckTotals[i]);                    
                 	std::cout << "linear market" << '\n';
@@ -283,7 +289,7 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
 				puckPrices[i] = 1.0;
 				std::cout << "use no market" << '\n';
 			}
-			std::cout << "Puck price: type:" << i <<"Price :"<< puckPrices[i] << '\n';
+			std::cout << "Puck price: type: " << i <<" Price : "<< puckPrices[i] << '\n';
 		}
 	}
 	std::cout << std::endl;

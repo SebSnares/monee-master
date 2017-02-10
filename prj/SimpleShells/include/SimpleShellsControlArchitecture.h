@@ -33,6 +33,8 @@ class SimpleShellsControlArchitecture : public BehaviorControlArchitecture {
         bool _randomSelection;
 	double _task1Premium;
         int _sigmarketSlope;
+        double _sigmarketMax;
+        double _sigmarketMin;
         double _selectionPressure;
 
         std::vector<double> _response;
