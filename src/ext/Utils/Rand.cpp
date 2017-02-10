@@ -12,7 +12,12 @@
 /* Get a random number in the range [min,max) */
 int Rand::randint(int minInclusive, int maxExclusive) {
     //return (int)((double)randouble()/(double)(maxExclusive-minInclusive)+minInclusive);
+    if (maxExclusive == 1 && minInclusive == 0){
+        return rand() % 2;
+    }
+    else{
     return (rand() % (maxExclusive - minInclusive)) + minInclusive;
+    }
 }
 
 double Rand::randouble() {
