@@ -275,20 +275,25 @@ void SimpleShellsControlArchitecture::assignFitness(std::vector<Genome> & genome
 		if (i != _wm->_energyPuckId || !_wm->_excludeEnergyPucks) {
 
 			if (_useMarket) {
-				std::cout << "use market" << '\n';
+				std::cout << "market" << '\n';
                 if (_useSigMarket) {
-                   std::cout << "use sigmarket with steep: " << steep << '\n';
-                   currentRatio = (cumTotal == 0) ? 0.0 : double(puckTotals[i])/double(cumTotal);  //calculate current puck ratio per type/total. If cumTotal = 0 avoid divide by zero error
-                   std::cout << "puck ratio: " << double(puckTotals[i]) << "/" << double(cumTotal) << " = " << currentRatio << '\n';
-                   std::cout << "market: " << double(_sigmarketMin) << "+" << (double(_sigmarketMax) - double(_sigmarketMin)) << " / " << (1.0 + std::exp( steep * (currentRatio - desiredRatio))) << '\n';
-                   puckPrices[i] = (cumTotal == 0) ? 0.0 : double(_sigmarketMin) + (double(_sigmarketMax) - double(_sigmarketMin)) / (1.0 + std::exp( steep * (currentRatio - desiredRatio))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
+                	if (cumTotal == 0){
+                		std::cout <<"cumtot: " << cumTotal << '\n';
+                		puckPrices[i] = 0.0;
+                	}else{
+               			std::cout << "steep: " << steep << '\n';
+                		currentRatio = double(puckTotals[i])/double(cumTotal);  //calculate current puck ratio per type/total. If cumTotal = 0 avoid divide by zero error
+                		std::cout << "puck-ratio: " << double(puckTotals[i]) << "/" << double(cumTotal) << " = " << currentRatio << '\n';
+                		std::cout << "market: " << double(_sigmarketMin) << "+" << (double(_sigmarketMax) - double(_sigmarketMin)) << " / " << (1.0 + std::exp( steep * (currentRatio - desiredRatio))) << '\n';
+                		puckPrices[i] = double(_sigmarketMin) + (double(_sigmarketMax) - double(_sigmarketMin)) / (1.0 + std::exp( steep * (currentRatio - desiredRatio))); // MARKET MECHANISM the exchange reate is defined here note: (puckTotals==0)? 0 : total/puckTotals means if pucktotals is 0 use 0 otherwise use Total/puckTotal -> avoid division by 0
+                	}
                 } else {
                     puckPrices[i] = (puckTotals[i] == 0) ? 0.0 : double(cumTotal) / double(puckTotals[i]);                    
                 	std::cout << "linear market" << '\n';
                 }
 			} else {
 				puckPrices[i] = 1.0;
-				std::cout << "use no market" << '\n';
+				std::cout << "no-market" << '\n';
 			}
 			std::cout << "Puck price: type: " << i <<" Price : "<< puckPrices[i] << '\n';
 		}
