@@ -31,23 +31,8 @@ do
    bash ${BASEDIR}/count-offspring.sh
    bash ${BASEDIR}/analyse-pressure.sh
    bash ${BASEDIR}/ages.sh
+   bash ${BASEDIR}/calculate-selection-pressure.sh
   )&
   popd
 done
 
-wait
-
-#bash ${BASEDIR}/make-plots.sh $@
-
-# lines below specific to runs w. multiple premium settings
-# bash ${BASEDIR}/calc_ratios.sh --iterations ${FLAGS_iterations}
-# gnuplot ${BASEDIR}/plot-pucks-ratio
-# gnuplot ${BASEDIR}/plot-pucks-counts
-# gnuplot ${BASEDIR}/plot-inseminations
-# 
-# 
-# for i in *png
-# do 
-#   DEST=`readlink -f $i | sed 's|'${BASEDIR}'/||' | sed -e 's/\//./g'`
-#   cp $i ${BASEDIR}/summary/${DEST}
-# done
